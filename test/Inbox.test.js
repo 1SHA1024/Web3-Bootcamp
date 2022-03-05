@@ -9,6 +9,7 @@ let accounts;
 let inbox;
 
 beforeEach(async () => {
+  // Get a list of all accounts
   accounts = await web3.eth.getAccounts();
   inbox = await new web3.eth.Contract(abi)
     .deploy({

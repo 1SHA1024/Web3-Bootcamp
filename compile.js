@@ -24,6 +24,3 @@ const input = {
 module.exports = JSON.parse(solc.compile(JSON.stringify(input))).contracts[
   'Inbox.sol'
 ].Inbox;
-
-// print contract compiled bytecode - error!
-// console.log(solc.compile(JSON.stringify(input)).contracts[":Inbox"].bytecode);
