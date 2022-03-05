@@ -1,5 +1,5 @@
 {
-  "name": "inbox-updated",
+  "name": "inbox",
   "version": "1.0.0",
   "description": "Web3 Bootcamp",
   "main": "index.js",
@@ -9,11 +9,11 @@
   "author": "Israel Peled",
   "license": "ISC",
   "dependencies": {
-    "@truffle/hdwallet-provider": "^2.0.1",
+    "@truffle/hdwallet-provider": "^2.0.3",
     "dotenv": "^16.0.0",
     "ganache-cli": "^6.12.2",
     "mocha": "^9.1.2",
-    "solc": "^0.8.9",
+    "solc": "^0.4.17",
     "web3": "^1.6.0"
   }
 }

@@ -1,33 +1,31 @@
-const assert = require('assert');
-const ganache = require('ganache-cli');
-const Web3 = require('web3');
-const web3 = new Web3(ganache.provider());
+const assert = require("assert");
+const ganache = require("ganache-cli");
+const Web3 = require("web3");
 
-const { abi, evm } = require('../compile');
+const web3 = new Web3(ganache.provider());  // import from local ganache testnet
+const { interface, bytecode } = require("../compile");
 
-let accounts;
-let inbox;
+let accounts; let inbox;
 
 beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
-  inbox = await new web3.eth.Contract(abi)
-    .deploy({
-      data: evm.bytecode.object,
-      arguments: ['Hi there!'],
-    })
-    .send({ from: accounts[0], gas: '1000000' });
+  inbox = await new web3.eth.Contract(JSON.parse(interface))
+    .deploy({ data: bytecode, arguments: ["Hi there!"]})
+    .send({ from: accounts[0], gas: "1000000" });
 });
 
-describe('Inbox', () => {
-  it('deploys a contract', () => {
-    assert.ok(inbox.options.address);
+describe("Inbox", () => {
+  it("deploys a contract", () => {
+    assert.ok(inbox.options.address);  // test if address is exists
   });
+
   it('has a default message', async () => {
-    const message = await inbox.methods.message().call();
+    const message = await inbox.methods.message().call();  // free call
     assert.equal(message, 'Hi there!');
-  });
+  })
+
   it('can change the message', async () => {
-    await inbox.methods.setMessage('bye').send({ from: accounts[0] });
+    await inbox.methods.setMessage('bye').send({ from: accounts[0] }); // pay gas
     const message = await inbox.methods.message().call();
     assert.equal(message, 'bye');
   });
